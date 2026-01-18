@@ -1,6 +1,8 @@
 package com.edutech.progressive.service.impl;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import com.edutech.progressive.dao.TeamDAO;
@@ -9,29 +11,44 @@ import com.edutech.progressive.service.TeamService;
 
 public class TeamServiceImplJdbc implements TeamService {
 
-private final TeamDAO teamDAO;
+
+    private final TeamDAO teamDAO;
 
     public TeamServiceImplJdbc(TeamDAO teamDAO) {
         this.teamDAO = teamDAO;
     }
 
-    @Override public List<Team> getAllTeams() { 
-        return new ArrayList<>(); 
+    @Override
+    public List<Team> getAllTeams() throws SQLException {
+        return teamDAO.getAllTeams();
     }
-    @Override public int addTeam(Team team) {
-         return -1; 
-        }
-    @Override public List<Team> getAllTeamsSortedByName() {
-         return new ArrayList<>(); 
-        }
-    @Override public Team getTeamById(int teamId) {
-         return null;
-         }
-    @Override public void updateTeam(Team team) { 
 
+    @Override
+    public int addTeam(Team team) throws SQLException {
+        return teamDAO.addTeam(team);
     }
-    @Override public void deleteTeam(int teamId) { 
-        
+
+    @Override
+    public List<Team> getAllTeamsSortedByName() throws SQLException {
+        List<Team> list = new ArrayList<>(teamDAO.getAllTeams());
+        Collections.sort(list);
+        return list;
     }
+
+    @Override
+    public Team getTeamById(int teamId) throws SQLException {
+        return teamDAO.getTeamById(teamId);
+    }
+
+    @Override
+    public void updateTeam(Team team) throws SQLException {
+        teamDAO.updateTeam(team);
+    }
+
+    @Override
+    public void deleteTeam(int teamId) throws SQLException {
+        teamDAO.deleteTeam(teamId);
+    }
+
 
 }

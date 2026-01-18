@@ -1,4 +1,6 @@
+
 package com.edutech.progressive.config;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
@@ -15,13 +17,12 @@ public final class DatabaseConnectionManager {
         loadDriverIfProvided();
     }
 
-    private DatabaseConnectionManager() { }
+    private DatabaseConnectionManager() {}
 
     private static void loadProperties() {
-        // Load application.properties from classpath (src/main/resources)
         try (InputStream in = Thread.currentThread()
-                                    .getContextClassLoader()
-                                    .getResourceAsStream("application.properties")) {
+                .getContextClassLoader()
+                .getResourceAsStream("application.properties")) {
             if (in == null) {
                 throw new RuntimeException("application.properties not found on classpath");
             }
@@ -46,7 +47,6 @@ public final class DatabaseConnectionManager {
         String url = properties.getProperty("db.url");
         String user = properties.getProperty("db.username");
         String pass = properties.getProperty("db.password");
-
         if (url == null || user == null || pass == null) {
             throw new RuntimeException("Database configuration is missing in application.properties");
         }
