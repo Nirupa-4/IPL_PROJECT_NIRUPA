@@ -12,10 +12,6 @@ import com.edutech.progressive.config.DatabaseConnectionManager;
 import com.edutech.progressive.entity.Team;
 
 public class TeamDAOImpl implements TeamDAO{
-
-
-
-
  @Override
     public int addTeam(Team team) throws SQLException {
         String sql = "INSERT INTO team (team_name, location, owner_name, establishment_year) VALUES (?, ?, ?, ?)";
@@ -37,15 +33,11 @@ public class TeamDAOImpl implements TeamDAO{
                 }
                 throw new SQLException("Inserting team failed, no ID obtained.");
             }
-        }
     }
 
     @Override
     public Team getTeamById(int teamId) throws SQLException {
         String sql = "SELECT team_id, team_name, location, owner_name, establishment_year FROM team WHERE team_id = ?";
-        try (Connection conn = DatabaseConnectionManager.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setInt(1, teamId);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) return mapRow(rs);
                 return null;
