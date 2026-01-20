@@ -1,8 +1,6 @@
 package com.edutech.progressive.entity;
 
 public class User {
-<<<<<<< HEAD
-=======
     private int userId;
     private String fullName;
     private String username;
@@ -69,6 +67,5 @@ public class User {
     public void setRole(String role) {
         this.role = role;
     }
->>>>>>> 796021ca5a16653a2609e2762566a4cc182be9f4
 
 }

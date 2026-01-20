@@ -1,8 +1,5 @@
 package com.edutech.progressive.service.impl;
 
-<<<<<<< HEAD
-public class MatchServiceImplJdbc  {
-=======
 import java.sql.SQLException;
 import java.util.List;
 
@@ -47,6 +44,5 @@ public class MatchServiceImplJdbc  implements MatchService{
     public void deleteMatch(int matchId) throws SQLException {
         matchDAO.deleteMatch(matchId);
     }
->>>>>>> 796021ca5a16653a2609e2762566a4cc182be9f4
 
 }

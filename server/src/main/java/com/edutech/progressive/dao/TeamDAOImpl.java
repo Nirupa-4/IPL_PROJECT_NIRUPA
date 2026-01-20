@@ -1,13 +1,4 @@
 package com.edutech.progressive.dao;
-<<<<<<< HEAD
-
-
-public class TeamDAOImpl {
-
-
-
-}
-=======
  
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -173,4 +164,3 @@ public class TeamDAOImpl implements TeamDAO {
     }
  
 }
->>>>>>> 796021ca5a16653a2609e2762566a4cc182be9f4

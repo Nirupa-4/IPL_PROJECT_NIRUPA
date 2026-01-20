@@ -1,8 +1,5 @@
 package com.edutech.progressive.entity;
 
-<<<<<<< HEAD
-public class Cricketer {
-=======
 public class Cricketer implements Comparable<Cricketer>{
     private int cricketerId;
     private int teamId;
@@ -126,6 +123,5 @@ public class Cricketer implements Comparable<Cricketer>{
     public int compareTo(Cricketer other) {
        return Integer.compare(this.experience, other.experience);
     }
->>>>>>> 796021ca5a16653a2609e2762566a4cc182be9f4
 
 }

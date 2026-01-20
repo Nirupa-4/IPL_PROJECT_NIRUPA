@@ -1,9 +1,4 @@
 package com.edutech.progressive.config;
-<<<<<<< HEAD
-
-public class DatabaseConnectionManager {
-
-=======
  
 import java.io.FileInputStream;
 import java.sql.Connection;
@@ -38,5 +33,4 @@ public class DatabaseConnectionManager {
         }
     }
  
->>>>>>> 796021ca5a16653a2609e2762566a4cc182be9f4
 }

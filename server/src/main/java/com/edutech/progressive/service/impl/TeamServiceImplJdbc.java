@@ -1,8 +1,5 @@
 package com.edutech.progressive.service.impl;
 
-<<<<<<< HEAD
-public class TeamServiceImplJdbc  {
-=======
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -53,6 +50,5 @@ public class TeamServiceImplJdbc implements TeamService {
         teamDAO.deleteTeam(teamId);
     }
 
->>>>>>> 796021ca5a16653a2609e2762566a4cc182be9f4
 
 }

@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-package com.edutech.progressive.dao;
-
-public class MatchDAOImpl {
-
-=======
  
 package com.edutech.progressive.dao;
  
@@ -145,5 +139,4 @@ public class MatchDAOImpl implements MatchDAO{
         return matches;
     }
  
->>>>>>> 796021ca5a16653a2609e2762566a4cc182be9f4
 }

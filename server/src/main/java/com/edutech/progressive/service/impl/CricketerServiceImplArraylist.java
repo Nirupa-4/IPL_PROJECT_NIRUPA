@@ -1,10 +1,5 @@
 package com.edutech.progressive.service.impl;
 
-<<<<<<< HEAD
-public class CricketerServiceImplArraylist  {
-
-}
-=======
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,4 +70,3 @@ public class CricketerServiceImplArraylist implements CricketerService {
     }
 }
 
->>>>>>> 796021ca5a16653a2609e2762566a4cc182be9f4

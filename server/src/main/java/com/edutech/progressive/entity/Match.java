@@ -1,9 +1,5 @@
 package com.edutech.progressive.entity;
 
-<<<<<<< HEAD
-public class Match {
-
-=======
 import java.util.Date;
 
 public class Match {
@@ -79,5 +75,4 @@ public class Match {
     }
 
     
->>>>>>> 796021ca5a16653a2609e2762566a4cc182be9f4
 }

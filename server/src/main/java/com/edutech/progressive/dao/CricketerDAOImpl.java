@@ -1,8 +1,5 @@
 package com.edutech.progressive.dao;
 
-<<<<<<< HEAD
-public class CricketerDAOImpl {
-=======
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -125,6 +122,5 @@ public class CricketerDAOImpl implements CricketerDAO {
         try { a.close(); } catch (Exception ignored) {}
     }
 
->>>>>>> 796021ca5a16653a2609e2762566a4cc182be9f4
 
 }

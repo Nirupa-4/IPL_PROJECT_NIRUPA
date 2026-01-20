@@ -1,8 +1,5 @@
 package com.edutech.progressive.service.impl;
 
-<<<<<<< HEAD
-public class CricketerServiceImplJdbc  {
-=======
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -58,6 +55,5 @@ private final CricketerDAO cricketerDAO;
     public Cricketer getCricketerById(int cricketerId) throws SQLException {
         return cricketerDAO.getCricketerById(cricketerId);
     }
->>>>>>> 796021ca5a16653a2609e2762566a4cc182be9f4
 
 }
