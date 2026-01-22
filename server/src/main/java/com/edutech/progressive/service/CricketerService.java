@@ -16,6 +16,6 @@ List<Cricketer> getAllCricketers() throws SQLException;
     default void updateCricketer(Cricketer cricketer) throws SQLException { }
     default void deleteCricketer(int cricketerId) throws SQLException { }
     default Cricketer getCricketerById(int cricketerId) throws SQLException { return null; }
-    default List<Cricketer> getCricketersByTeam(int teamId) { return null; }
+    default List<Cricketer> getCricketersByTeam(int teamId) throws SQLException { return null; }
 
 }

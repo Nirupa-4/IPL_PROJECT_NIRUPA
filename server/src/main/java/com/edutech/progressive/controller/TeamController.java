@@ -1,9 +1,7 @@
- 
 package com.edutech.progressive.controller;
  
 import com.edutech.progressive.entity.Team;
 import com.edutech.progressive.service.impl.TeamServiceImplArraylist;
-import com.edutech.progressive.service.impl.TeamServiceImplJdbc;
 import com.edutech.progressive.service.impl.TeamServiceImplJpa;
  
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,18 +23,22 @@ import java.util.List;
 @RequestMapping("/team")
 public class TeamController {
  
-    @Autowired
     private TeamServiceImplArraylist teamServiceImplArraylist;
  
-    @Autowired
     private TeamServiceImplJpa teamServiceImplJpa;
+ 
+    @Autowired
+    public TeamController(TeamServiceImplArraylist teamServiceImplArraylist, TeamServiceImplJpa teamServiceImplJpa) {
+        this.teamServiceImplArraylist = teamServiceImplArraylist;
+        this.teamServiceImplJpa = teamServiceImplJpa;
+    }
  
     @GetMapping
     public ResponseEntity<List<Team>> getAllTeams() {
         try {
-            return new ResponseEntity<>(teamServiceImplJpa.getAllTeams(),HttpStatus.OK);
+            return new ResponseEntity<>(teamServiceImplJpa.getAllTeams(), HttpStatus.OK);
         } catch (SQLException e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);   
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
  
@@ -47,19 +49,19 @@ public class TeamController {
         } catch (SQLException e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-    }  
+    }
  
-    @PostMapping("/{team}")
-    public ResponseEntity<Integer> addTeam(@PathVariable Team team) {
+    @PostMapping
+    public ResponseEntity<Integer> addTeam(@RequestBody Team team) {
         try {
-            return new ResponseEntity<>(teamServiceImplJpa.addTeam(team),HttpStatus.OK);
+            return new ResponseEntity<>(teamServiceImplJpa.addTeam(team),HttpStatus.CREATED);
         } catch (SQLException e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
  
     @PutMapping("/{teamId}")
-    public ResponseEntity<Void> updateTeam(@PathVariable int teamId, Team team) {
+    public ResponseEntity<Void> updateTeam(@PathVariable int teamId, @RequestBody Team team) {
         try {
             teamServiceImplJpa.updateTeam(team);
             return new ResponseEntity<>(HttpStatus.OK);
@@ -72,7 +74,7 @@ public class TeamController {
     public ResponseEntity<Void> deleteTeam(@PathVariable int teamId) {
         try {
             teamServiceImplJpa.deleteTeam(teamId);
-            return new ResponseEntity<>(HttpStatus.OK);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (SQLException e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -82,12 +84,10 @@ public class TeamController {
     public ResponseEntity<List<Team>> getAllTeamsFromArrayList() throws SQLException {
         return new ResponseEntity<>(teamServiceImplArraylist.getAllTeams(),HttpStatus.OK);
     }
- 
     @PostMapping("/toArrayList")
     public ResponseEntity<Integer> addTeamToArrayList(@RequestBody Team team) throws SQLException {
         return new ResponseEntity<>(teamServiceImplArraylist.addTeam(team),HttpStatus.CREATED);
     }
- 
     @GetMapping("/fromArrayList/sorted")
     public ResponseEntity<List<Team>> getAllTeamsSortedByNameFromArrayList() throws SQLException {
         return new ResponseEntity<>(teamServiceImplArraylist.getAllTeamsSortedByName(),HttpStatus.OK);

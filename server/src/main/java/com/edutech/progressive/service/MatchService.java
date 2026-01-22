@@ -14,6 +14,6 @@ List<Match> getAllMatches() throws SQLException;
     void updateMatch(Match match) throws SQLException;
     void deleteMatch(int matchId) throws SQLException;
 
-    default List<Match> getAllMatchesByStatus(String status) { return null; }
+    default List<Match> getAllMatchesByStatus(String status) throws SQLException { return null; }
 
 }
