@@ -1,3 +1,4 @@
+
 package com.edutech.progressive.dao;
 
 import java.sql.Connection;
@@ -5,23 +6,30 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.edutech.progressive.config.DatabaseConnectionManager;
 import com.edutech.progressive.entity.Cricketer;
+import com.edutech.progressive.entity.Team;
 
 public class CricketerDAOImpl implements CricketerDAO {
 
-
-  @Override
+    @Override
     public int addCricketer(Cricketer c) throws SQLException {
         String sql = "INSERT INTO cricketer (team_id, cricketer_name, age, nationality, experience, role, total_runs, total_wickets) " +
                      "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         try (Connection conn = DatabaseConnectionManager.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
-            ps.setInt(1, c.getTeamId());
+            // team_id
+            if (c.getTeam() != null) {
+                ps.setInt(1, c.getTeam().getTeamId());
+            } else {
+                ps.setNull(1, Types.INTEGER);
+            }
+
             ps.setString(2, c.getCricketerName());
             ps.setInt(3, c.getAge());
             ps.setString(4, c.getNationality());
@@ -44,7 +52,6 @@ public class CricketerDAOImpl implements CricketerDAO {
     public Cricketer getCricketerById(int cricketerId) throws SQLException {
         String sql = "SELECT cricketer_id, team_id, cricketer_name, age, nationality, experience, role, total_runs, total_wickets " +
                      "FROM cricketer WHERE cricketer_id = ?";
-        // explicit try-catch-finally to satisfy Day 3 requirement
         Connection conn = null; PreparedStatement ps = null; ResultSet rs = null;
         try {
             conn = DatabaseConnectionManager.getConnection();
@@ -67,7 +74,13 @@ public class CricketerDAOImpl implements CricketerDAO {
                      "WHERE cricketer_id=?";
         try (Connection conn = DatabaseConnectionManager.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setInt(1, c.getTeamId());
+
+            if (c.getTeam() != null) {
+                ps.setInt(1, c.getTeam().getTeamId());
+            } else {
+                ps.setNull(1, Types.INTEGER);
+            }
+
             ps.setString(2, c.getCricketerName());
             ps.setInt(3, c.getAge());
             ps.setString(4, c.getNationality());
@@ -106,7 +119,12 @@ public class CricketerDAOImpl implements CricketerDAO {
     private Cricketer mapRow(ResultSet rs) throws SQLException {
         Cricketer c = new Cricketer();
         c.setCricketerId(rs.getInt("cricketer_id"));
-        c.setTeamId(rs.getInt("team_id"));
+
+        // Build Team with just the ID
+        int teamId = rs.getInt("team_id");
+        Team team = new Team(teamId, null, null, null, 0);
+        c.setTeam(team);
+
         c.setCricketerName(rs.getString("cricketer_name"));
         c.setAge(rs.getInt("age"));
         c.setNationality(rs.getString("nationality"));
@@ -121,6 +139,4 @@ public class CricketerDAOImpl implements CricketerDAO {
         if (a == null) return;
         try { a.close(); } catch (Exception ignored) {}
     }
-
-
 }
