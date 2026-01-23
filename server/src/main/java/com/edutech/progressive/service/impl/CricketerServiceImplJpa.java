@@ -41,7 +41,6 @@ public class CricketerServiceImplJpa implements CricketerService {
 
     @Override
     public void updateCricketer(Cricketer cricketer) throws SQLException {
-        // save acts as update when ID is present
         cricketerRepository.save(cricketer);
     }
 

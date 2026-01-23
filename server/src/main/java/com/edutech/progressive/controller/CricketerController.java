@@ -59,7 +59,7 @@ public class CricketerController {
     public ResponseEntity<Void> updateCricketer(@PathVariable int cricketerId,
                                                 @RequestBody Cricketer cricketer) {
         try {
-            cricketer.setCricketerId(cricketerId); // apply path id
+            cricketer.setCricketerId(cricketerId); 
             cricketerService.updateCricketer(cricketer);
             return ResponseEntity.ok().build();
         } catch (Exception e) {
@@ -79,7 +79,6 @@ public class CricketerController {
     }
 
     // FETCH by team
-    // ⚠️ If your tests expect /cricketer/cricketer/team/{teamId}, change the mapping below to match EXACTLY.
     @GetMapping("/team/{teamId}")
     public ResponseEntity<List<Cricketer>> getCricketersByTeam(@PathVariable int teamId) {
         try {

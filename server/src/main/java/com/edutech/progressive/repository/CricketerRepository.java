@@ -16,10 +16,10 @@ public interface CricketerRepository extends JpaRepository<Cricketer, Integer> {
 
     Optional<Cricketer> findByCricketerId(int cricketerId);
 
-    // ✅ relation traversal (works with ManyToOne Team)
+  
     List<Cricketer> findByTeam_TeamId(int teamId);
 
-    // Keep this name if something else calls it; implement via JPQL so it still works
+  
     @Modifying
     @Transactional
     @Query("delete from Cricketer c where c.team.teamId = :teamId")

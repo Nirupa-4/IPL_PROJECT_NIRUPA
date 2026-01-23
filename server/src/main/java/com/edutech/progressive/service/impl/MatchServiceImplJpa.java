@@ -1,46 +1,84 @@
+
 package com.edutech.progressive.service.impl;
- 
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
- 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
- 
+
 import com.edutech.progressive.entity.Match;
 import com.edutech.progressive.repository.MatchRepository;
 import com.edutech.progressive.service.MatchService;
- 
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.sql.SQLException;
+import java.util.List;
+
 @Service
+@Transactional
 public class MatchServiceImplJpa implements MatchService {
- 
-    @Autowired
-    private MatchRepository matchRepository;
- 
+
+    private final MatchRepository matchRepository;
+
+    public MatchServiceImplJpa(MatchRepository matchRepository) {
+        this.matchRepository = matchRepository;
+    }
+
     @Override
+    @Transactional(readOnly = true)
     public List<Match> getAllMatches() throws SQLException {
-        return new ArrayList<>();
+        try {
+            return matchRepository.findAll();
+        } catch (Exception e) {
+            throw toSqlException(e);
+        }
     }
- 
+
     @Override
+    @Transactional(readOnly = true)
     public Match getMatchById(int matchId) throws SQLException {
-        return null;
+        try {
+            return matchRepository.findById(matchId).orElse(null);
+        } catch (Exception e) {
+            throw toSqlException(e);
+        }
     }
- 
+
     @Override
     public Integer addMatch(Match match) throws SQLException {
-        return -1;
+        try {
+            Match saved = matchRepository.save(match);
+            return saved.getMatchId();
+        } catch (Exception e) {
+            throw toSqlException(e);
+        }
     }
- 
+
     @Override
     public void updateMatch(Match match) throws SQLException {
+        try {
+            matchRepository.save(match);
+        } catch (Exception e) {
+            throw toSqlException(e);
+        }
     }
- 
+
     @Override
     public void deleteMatch(int matchId) throws SQLException {
+        try {
+            matchRepository.deleteById(matchId);
+        } catch (Exception e) {
+            throw toSqlException(e);
+        }
     }
- 
-    public List<Match> getAllMatchesByStatus(String status) throws SQLException{
-        return null;
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Match> getAllMatchesByStatus(String status) throws SQLException {
+        try {
+            return matchRepository.findByStatusIgnoreCase(status);
+        } catch (Exception e) {
+            throw toSqlException(e);
+        }
+    }
+
+    private SQLException toSqlException(Exception e) {
+        return (e instanceof SQLException) ? (SQLException) e : new SQLException(e.getMessage(), e);
     }
 }

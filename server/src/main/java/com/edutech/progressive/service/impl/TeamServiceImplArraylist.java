@@ -17,24 +17,21 @@ import com.edutech.progressive.service.TeamService;
 @Qualifier("teamServiceArrayList")
 public class TeamServiceImplArraylist implements TeamService {
 
-    // In-memory store for Team entities
     private List<Team> teams = new ArrayList<>();
 
     @Override
     public List<Team> getAllTeams() throws SQLException {
-        // Defensive copy to avoid external mutation
         return new ArrayList<>(teams);
     }
 
     @Override
     public int addTeam(Team team) throws SQLException {
         teams.add(team);
-        return teams.size(); // Day-5 spec: return new size/ID
+        return teams.size(); 
     }
 
     @Override
     public List<Team> getAllTeamsSortedByName() throws SQLException {
-        // Case-insensitive, null-safe comparator (helps test stability)
         return teams.stream()
                 .sorted(Comparator.comparing(
                         Team::getTeamName,
@@ -48,7 +45,6 @@ public class TeamServiceImplArraylist implements TeamService {
         this.teams = new ArrayList<>();
     }
 
-    // Not required for ArrayList implementation on Day 5
     @Override public Team getTeamById(int teamId) throws SQLException { return null; }
     @Override public void updateTeam(Team team) throws SQLException { }
     @Override public void deleteTeam(int teamId) throws SQLException { }

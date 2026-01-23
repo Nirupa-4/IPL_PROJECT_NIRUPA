@@ -1,4 +1,3 @@
-
 package com.edutech.progressive.entity;
 
 import javax.persistence.*;
@@ -12,7 +11,6 @@ public class Cricketer implements Comparable<Cricketer> {
     @Column(name = "cricketer_id")
     private int cricketerId;
 
-    // 🔁 Replace primitive FK with a proper relation
     @ManyToOne(fetch = FetchType.LAZY)                  // Many cricketers -> One team
     @JoinColumn(name = "team_id", nullable = false)     // FK column in cricketer table
     private Team team;
@@ -40,7 +38,6 @@ public class Cricketer implements Comparable<Cricketer> {
 
     public Cricketer() { }
 
-    // Convenience ctor (keep if needed)
     public Cricketer(int cricketerId, Team team, String cricketerName, int age, String nationality,
                      int experience, String role, int totalRuns, int totalWickets) {
         this.cricketerId = cricketerId;
@@ -54,7 +51,6 @@ public class Cricketer implements Comparable<Cricketer> {
         this.totalWickets = totalWickets;
     }
 
-    // Getters and setters
     public int getCricketerId() { return cricketerId; }
     public void setCricketerId(int cricketerId) { this.cricketerId = cricketerId; }
 

@@ -22,8 +22,6 @@ public class CricketerDAOImpl implements CricketerDAO {
                      "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         try (Connection conn = DatabaseConnectionManager.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-
-            // team_id
             if (c.getTeam() != null) {
                 ps.setInt(1, c.getTeam().getTeamId());
             } else {
@@ -119,8 +117,6 @@ public class CricketerDAOImpl implements CricketerDAO {
     private Cricketer mapRow(ResultSet rs) throws SQLException {
         Cricketer c = new Cricketer();
         c.setCricketerId(rs.getInt("cricketer_id"));
-
-        // Build Team with just the ID
         int teamId = rs.getInt("team_id");
         Team team = new Team(teamId, null, null, null, 0);
         c.setTeam(team);

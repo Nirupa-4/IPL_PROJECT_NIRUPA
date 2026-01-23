@@ -14,13 +14,13 @@ public class CricketerServiceImplArraylist implements CricketerService {
     private List<Cricketer> cricketers = new ArrayList<>();
 
     public CricketerServiceImplArraylist() {
-        // Helper Teams with only ID populated
+       
         Team t101 = new Team(101, null, null, null, 0);
         Team t102 = new Team(102, null, null, null, 0);
         Team t103 = new Team(103, null, null, null, 0);
         Team t104 = new Team(104, null, null, null, 0);
 
-        // Sample in-memory data using the new Cricketer( id, Team, ... ) constructor
+       
         cricketers.add(new Cricketer(1, t101, "Virat Kohli", 35, "India", 15, "Batsman", 12000, 4));
         cricketers.add(new Cricketer(2, t102, "Mitchell Starc", 35, "Australia", 12, "Bowler", 400, 250));
         cricketers.add(new Cricketer(3, t101, "Ravindra Jadeja", 37, "India", 14, "All-rounder", 2500, 180));
@@ -42,7 +42,7 @@ public class CricketerServiceImplArraylist implements CricketerService {
     @Override
     public List<Cricketer> getAllCricketersSortedByExperience() {
         List<Cricketer> copy = new ArrayList<>(cricketers);
-        Collections.sort(copy); // uses Cricketer.compareTo (experience)
+        Collections.sort(copy); 
         return copy;
     }
 
