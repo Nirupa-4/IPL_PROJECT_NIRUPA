@@ -2,6 +2,7 @@
 package com.edutech.progressive.service.impl;
 
 import com.edutech.progressive.entity.Match;
+import com.edutech.progressive.exception.NoMatchesFoundException;
 import com.edutech.progressive.repository.MatchRepository;
 import com.edutech.progressive.service.MatchService;
 import org.springframework.stereotype.Service;
@@ -72,7 +73,13 @@ public class MatchServiceImplJpa implements MatchService {
     @Transactional(readOnly = true)
     public List<Match> getAllMatchesByStatus(String status) throws SQLException {
         try {
-            return matchRepository.findByStatusIgnoreCase(status);
+            List<Match> matches = matchRepository.findByStatusIgnoreCase(status);
+            if (matches == null || matches.isEmpty()) {
+                throw new NoMatchesFoundException("No matches found with status '" + status + "'");
+            }
+            return matches;
+        } catch (NoMatchesFoundException ex) {
+            throw ex;
         } catch (Exception e) {
             throw toSqlException(e);
         }
