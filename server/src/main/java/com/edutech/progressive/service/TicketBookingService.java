@@ -12,5 +12,4 @@ public interface TicketBookingService {
     void cancelBooking(int bookingId);
 
     List<TicketBooking> getBookingsByUserEmail(String email);
-
 }
