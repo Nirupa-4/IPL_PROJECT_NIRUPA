@@ -1,15 +1,32 @@
 package com.edutech.progressive.entity;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "user") // must be exactly 'user' to match your DDL
 public class User {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id")
     private int userId;
+
+    @Column(name = "full_name", nullable = false, length = 255)
     private String fullName;
+
+    @Column(name = "username", nullable = false, length = 50)
     private String username;
+
+    @Column(name = "password", nullable = false, length = 255)
     private String password;
+
+    @Column(name = "email", nullable = false, length = 100)
     private String email;
+
+    @Column(name = "role", nullable = false, length = 100)
     private String role;
 
-    public User() {
-    }
+    public User() { }
 
     public User(int userId, String fullName, String username, String password, String email, String role) {
         this.userId = userId;
@@ -68,4 +85,6 @@ public class User {
         this.role = role;
     }
 
+    // getters and setters...
+    
 }
